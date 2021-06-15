@@ -1,12 +1,12 @@
 {
-  "name": "URL Chat",
-  "version": "1.0",
+  "name": "Gadfly Chat Extension",
+  "version": "0.0.0.1",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html"
+    "default_title": "Chat with other users of this site."
   },
   "permissions": ["tabs", "storage"]
 }

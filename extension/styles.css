@@ -1,41 +1,99 @@
 body {
   width: 350px;
-  max-width: 100%;
   background-color: #fafafa;
   font-size: 16px;
+}
+
+header {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 h1 {
   font-size: 16px;
 }
 
+#name-form,
+#name-current {
+  position: absolute;
+  right: 8px;
+}
+
+#name-input {
+  padding: 6px 2px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#name-save {
+  color: #fff;
+  border: 1px solid #ccc;
+  background-color: #3276b1;
+  border-color: #285e8e;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+#name-current {
+  margin: 0;
+  max-width: 30%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 #messages {
-  height: 200px;
+  height: 290px;
   overflow: auto;
   list-style-type: none;
   padding: 0.5rem;
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #e6e6e6;
+  margin-top: 0;
 }
 
-#messages li {
+li {
+  position: relative;
   display: flex;
   padding: 0.5rem;
-  margin: 10px 0;
+  margin: 30px 0 0 0;
   width: auto;
   max-width: 80%;
   border-radius: 5px;
   background: #edf0f2;
-  box-shadow: 0 0 transparent, 0 0 transparent,
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-#messages li.self {
+li:first {
+  margin-top: 0;
+}
+
+li.self {
   justify-content: flex-start;
   background: #e3f0fc;
   margin-left: auto;
   justify-content: flex-end;
+}
+
+li.self + li.self {
+  margin-top: 0;
+}
+
+#message-content {
+}
+
+#message-timestamp {
+  display: none;
+}
+
+#message-user {
+  position: absolute;
+  top: 100%;
+  font-size: 12px;
+  padding: 4px 2px;
+}
+
+.self #message-user {
+  display: none;
 }
 
 form {
@@ -69,4 +127,26 @@ form {
   outline: 0;
   background-image: none;
   box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
+}
+
+.hide {
+  display: none;
+}
+
+.text-button {
+  background: none;
+  outline: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.text-button:hover,
+.text-button:focus {
+  border-bottom: 1px solid #3276b1;
+}
+
+.shadow-sm {
+  box-shadow: 0 0 transparent, 0 0 transparent,
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }

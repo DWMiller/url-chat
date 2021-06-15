@@ -3,16 +3,20 @@ function socket(io, app) {
     socket.emit('connected');
 
     socket.on('join-room', function (url) {
-      console.log(`user connected on ${url}`);
+      // console.log(`user connected on ${url}`);
       socket.join(url);
     });
 
-    socket.on('msg', function ({ room, content }) {
-      socket.to(room).emit('msg', content);
+    socket.on('msg', function ({ room, content, username = '' }) {
+      socket.to(room).emit('msg', {
+        username,
+        content,
+        timestamp: Date.now().toString(),
+      });
     });
 
     socket.on('disconnect', function () {
-      console.log('user disconnected');
+      // console.log('user disconnected');
     });
   });
 }

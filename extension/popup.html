@@ -5,19 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gadfly Chat Extension</title>
 
     <link rel="stylesheet" href="styles.css">
     <script src="socket.io.min.js"></script>
-
-
 </head>
 
 <body>
-    <h1 id="header">Site chat.</h1>
+    <header>
+        <p id="name-current">
+            <span id="name-value"></span>
+            <button id="name-change" class="text-button">(change)</button>
+        </p>
+        <form id="name-form" class="hide">
+            <input type="text" placeholder="" id="name-input" />
+            <button type="submit" id="name-save">✓</button>
+        </form>
+        <h1 id="header">Web chat for: <br> <span id="site"></span></h1>
+    </header>
+
     <ul id="messages"></ul>
     <form id="message-form" action="">
-        <input type="text" id="message-input" />
+        <input type="text" placeholder="Chat with other visitors on this webpage" id="message-input" />
         <button type="submit" id="message-send">Send</button>
     </form>
     <script src="content.js"></script>
