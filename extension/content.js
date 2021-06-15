@@ -7,7 +7,7 @@ let username = '';
 // console.log(window);
 const messages = {};
 // chrome.storage.local.clear();
-const socket = io('http://24.36.81.134:3000/');
+const socket = io('http://165.227.39.21:3000/');
 
 const messageInputElement = document.getElementById('message-input');
 
