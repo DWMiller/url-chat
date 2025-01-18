@@ -1,152 +1,240 @@
+:root {
+  /* Colors */
+  --color-primary: #3276b1;
+  --color-bg: #fafafa;
+  --color-text: #2c3e50;
+  --color-text-light: #666;
+  --color-border: #e1e4e8;
+  --color-message-self: #e3f2fd;
+  --color-message-other: #fff;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+}
+
+/* Reset default margins and set box-sizing */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   width: 350px;
-  background-color: #fafafa;
-  font-size: 16px;
+  min-height: 500px;
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 header {
-  text-overflow: ellipsis;
-  overflow: hidden;
+  padding: var(--space-md);
+  background: var(--color-primary);
+  color: white;
+  border-bottom: none;
+  position: relative; /* For name form positioning */
 }
 
-h1 {
-  font-size: 16px;
-}
-
-#name-form,
-#name-current {
-  position: absolute;
-  right: 8px;
-}
-
-#name-input {
-  padding: 6px 2px;
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-}
-
-#name-save {
-  color: #fff;
-  border: 1px solid #ccc;
-  background-color: #3276b1;
-  border-color: #285e8e;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
-
-#name-current {
-  margin: 0;
-  max-width: 30%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
+/* Messages Container */
 #messages {
-  height: 290px;
-  overflow: auto;
-  list-style-type: none;
-  padding: 0.5rem;
-  background-color: #fff;
-  border-radius: 5px;
-  border: 1px solid #e6e6e6;
-  margin-top: 0;
-}
-
-li {
-  position: relative;
+  height: 100%; /* Fill available space */
+  overflow-y: auto;
+  padding: var(--space-sm);
   display: flex;
-  padding: 0.5rem;
-  margin: 30px 0 0 0;
-  width: auto;
-  max-width: 80%;
-  border-radius: 5px;
-  background: #edf0f2;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background: var(--color-bg);
+  position: relative; /* For empty state positioning */
 }
 
-li:first {
-  margin-top: 0;
-}
-
-li.self {
-  justify-content: flex-start;
-  background: #e3f0fc;
-  margin-left: auto;
-  justify-content: flex-end;
-}
-
-li.self + li.self {
-  margin-top: 0;
-}
-
-#message-content {
-}
-
-#message-timestamp {
-  display: none;
-}
-
-#message-user {
-  position: absolute;
-  top: 100%;
-  font-size: 12px;
-  padding: 4px 2px;
-}
-
-.self #message-user {
-  display: none;
-}
-
-form {
+/* Message Form */
+#message-form {
+  padding: var(--space-sm);
   display: flex;
+  gap: var(--space-sm);
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
 }
 
 #message-input {
-  flex: 1 0 auto;
-  padding: 0.5rem;
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  border: 1px solid #ccc;
-}
-
-#message-input:focus {
-  border-color: #66afe9;
-  outline: 0;
-  box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%);
+  flex: 1;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 #message-send {
-  color: #fff;
-  border: 1px solid #ccc;
-  background-color: #3276b1;
-  border-color: #285e8e;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
-
-#message-send:active {
-  outline: 0;
-  background-image: none;
-  box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
-}
-
-.hide {
-  display: none;
-}
-
-.text-button {
-  background: none;
-  outline: none;
-  padding: 0;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-primary);
+  color: white;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.text-button:hover,
-.text-button:focus {
-  border-bottom: 1px solid #3276b1;
+/* Message Bubbles */
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+  gap: var(--space-xs);
 }
 
-.shadow-sm {
-  box-shadow: 0 0 transparent, 0 0 transparent,
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.message.self {
+  align-self: flex-end;
+}
+
+.message-bubble {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 1rem;
+  background: var(--color-message-other);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.message.self .message-bubble {
+  background: var(--color-message-self);
+}
+
+/* Message Metadata */
+.message-meta {
+  display: flex;
+  gap: var(--space-sm);
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+.message.self .message-meta {
+  justify-content: flex-end;
+}
+
+/* Message Groups */
+.message + .message {
+  margin-top: var(--space-xs);
+}
+
+.message.same-user {
+  margin-top: 2px;
+}
+
+.message.same-user .message-meta {
+  display: none;
+}
+
+/* Empty state styling */
+#messages:empty::before {
+  content: 'No messages yet.\A Start chatting with others on this page!';
+  white-space: pre;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  padding: var(--space-md);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1a1a1a;
+    --color-text: #e0e0e0;
+    --color-text-light: #999;
+    --color-border: #333;
+    --color-message-self: #1e3a5a;
+    --color-message-other: #2d2d2d;
+  }
+  
+  header {
+    background: var(--color-bg);
+  }
+  
+  #messages:empty::before {
+    opacity: 0.7;
+  }
+}
+
+/* Update/add these styles */
+
+/* Header styling */
+header {
+  padding: var(--space-md);
+  background: var(--color-primary);
+  color: white;
+  border-bottom: none;
+}
+
+/* Username display */
+#name-current {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+#name-current:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#name-change {
+  display: none; /* Hide the change button */
+}
+
+/* Name change form - hidden by default */
+#name-form {
+  display: none;
+  position: absolute;
+  right: var(--space-md);
+  top: var(--space-md);
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px;
+  border-radius: 4px;
+}
+
+#name-form.show {
+  display: flex;
+}
+
+#name-input {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  color: var(--color-text);
+  padding: 4px 8px;
+  border-radius: 4px 0 0 4px;
+  font-size: 0.75rem;
+  width: 120px;
+}
+
+#name-save {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  color: var(--color-primary);
+  padding: 4px 8px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+#name-save:hover {
+  background: white;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #1a5fb4;
+  }
 }

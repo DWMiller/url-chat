@@ -5,31 +5,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>Gadfly Chat Extension</title>
 
     <link rel="stylesheet" href="styles.css">
-    <script src="socket.io.min.js"></script>
 </head>
 
 <body>
     <header>
-        <p id="name-current">
-            <span id="name-value"></span>
-            <button id="name-change" class="text-button">(change)</button>
-        </p>
-        <form id="name-form" class="hide">
-            <input type="text" placeholder="" id="name-input" />
+        <div id="name-current">
+            <span id="name-value">Anonymous</span>
+            <span id="name-change">✎</span>
+        </div>
+        <form id="name-form">
+            <input type="text" placeholder="Enter username" id="name-input" />
             <button type="submit" id="name-save">✓</button>
         </form>
         <h1 id="header">Web chat for: <br> <span id="site"></span></h1>
     </header>
 
-    <ul id="messages"></ul>
-    <form id="message-form" action="">
-        <input type="text" placeholder="Chat with other visitors on this webpage" id="message-input" />
-        <button type="submit" id="message-send">Send</button>
-    </form>
-    <script src="content.js"></script>
+    <main>
+        <ul id="messages" aria-live="polite"></ul>
+        <form id="message-form" action="">
+            <input 
+                type="text" 
+                placeholder="Chat with other visitors on this webpage" 
+                id="message-input"
+                aria-label="Message input"
+                autocomplete="off"
+            />
+            <button type="submit" id="message-send" aria-label="Send message">Send</button>
+        </form>
+    </main>
+
+    <script src="socket.io.min.js"></script>
+    <script type="module" src="content.js"></script>
 </body>
 
 </html>

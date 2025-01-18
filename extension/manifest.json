@@ -6,7 +6,16 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Chat with other users of this site."
+    "default_title": "Chat with other users of this site.",
+    "default_popup": "popup.html"
   },
-  "permissions": ["tabs", "storage"]
+  "permissions": ["tabs", "storage", "activeTab"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' *"
+  },
+  "host_permissions": ["*://*/*"],
+  "web_accessible_resources": [{
+    "resources": ["popup.html", "styles.css", "socket.io.min.js"],
+    "matches": ["<all_urls>"]
+  }]
 }
